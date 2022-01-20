@@ -373,6 +373,20 @@ const Fmt LteRrcOtaPacketFmt_v26[] = {
         {UINT, "Msg Length",                  2}
 };
 
+const Fmt LteRrcOtaPacketFmt_v27[] = {
+        {BYTE_STREAM, "RRC Version Number",   1}, 
+        {UINT, "NR RRC Release Number",       1},
+        {BYTE_STREAM, "NR RRC Version Number",1},
+        {UINT, "Radio Bearer ID",             1},
+        {UINT, "Physical Cell ID",            2},    //Cell ID
+        {UINT, "Freq",                        2},    //frequency
+        {UINT, "SysFrameNum/SubFrameNum",     4},    //System/subsystem frame number 
+        {UINT, "PDU Number",                  1},    //PDU number
+        {UINT, "SIB Mask in SI",              1},
+        {SKIP, NULL,                          3},
+        {UINT, "Msg Length",                  2}
+};
+
 const ValueName LteRrcOtaPduType[] = {
         {0x02, "LTE-RRC_BCCH_DL_SCH"},
         {0x04, "LTE-RRC_PCCH"},
@@ -457,6 +471,7 @@ const ValueName NrRrcOtaPduType_v8[] = {
         {0x0a, "nr-rrc.ul.dcch"},   // RRC Reconfiguration Complete
         {0x08, "nr-rrc.ul.dcch"},   // Derived from measurement report (uplink, dedicated link)
         {0x09, "nr-rrc.rrc_reconf"}, // Reconfiguration message
+        //{0x19, "nr-rrc.unknown"}, // Sophie: I don't know QQ
         {0x1a, "nr-rrc.radio_bearer_conf"}, // Radio Bearer Config
         // {0x00, "nr-rrc.ue_mrdc_cap"}, // unknown so far
         // {0x00, "nr-rrc.ue_nr_cap"}, // unknown so far

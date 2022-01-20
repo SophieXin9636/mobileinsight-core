@@ -299,13 +299,18 @@ _decode_lte_rrc_ota(const char *b, int offset, size_t length,
                                      ARRAY_SIZE(LteRrcOtaPacketFmt_v26, Fmt),
                                      b, offset, length, result);
             break;
+        case 27:
+            offset += _decode_by_fmt(LteRrcOtaPacketFmt_v27,
+                                     ARRAY_SIZE(LteRrcOtaPacketFmt_v27, Fmt),
+                                     b, offset, length, result);
+            break;
         default:
             printf("(MI)Unknown LTE RRC OTA packet version: %d\n", pkt_ver);
             return 0;
     }
 
     //pkt_ver == 26 added for
-    if(pkt_ver == 19 || pkt_ver == 26) {
+    if(pkt_ver == 19 || pkt_ver == 26 || pkt_ver == 27) {
 
         int pdu_number = _search_result_int(result, "PDU Number");
         int pdu_length = _search_result_int(result, "Msg Length");
@@ -11375,8 +11380,8 @@ _decode_nr_rrc_ota(const char *b, int offset, size_t length,
     int start = offset;
     int pkt_ver = _search_result_int(result, "Pkt Version");
 
-    //pkt_ver==8 (Xiaomi)
-    if (pkt_ver == 8) {
+    //pkt_ver==8 (Xiaomi) // pkt_ver==9 (Sony Xperia 10 III)
+    if (pkt_ver == 8 || pkt_ver == 9) {
 
         int pdu_number = _search_result_int(result, "PDU Number");
         int pdu_length = _search_result_int(result, "Msg Length");
